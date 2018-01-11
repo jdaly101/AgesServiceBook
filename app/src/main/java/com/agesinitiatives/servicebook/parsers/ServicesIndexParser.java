@@ -11,12 +11,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class ServicesIndexParser {
-    private static final String TAG = "ServiceListParser";
+    private static final String TAG = "ServicesIndexParser";
     private JSONObject _jsonObj;
+    private List<AgesDate> _parsedDatesList;
 
     public ServicesIndexParser(JSONObject jsonObject) {
         this._jsonObj = jsonObject;
@@ -41,12 +43,13 @@ public class ServicesIndexParser {
                     for (int k=0; k < datesInMonth.length(); k++) {
                         JSONObject dateObj = datesInMonth.getJSONObject(k);
                         String dateStr = dateObj.keys().next();
+
                         JSONArray servicesArray = dateObj.getJSONArray(dateStr);
                         String dateNum = dateStr.substring(0, 2);
                         calendar.set(
                                 Integer.parseInt(yearStr),
                                 this.parseMonthName(monthStr),
-                                Integer.parseInt(dateStr)
+                                Integer.parseInt(dateNum )
                         );
                         Date d = calendar.getTime();
 
@@ -66,7 +69,31 @@ public class ServicesIndexParser {
             Log.e(TAG, "Error during service list parsing: " + e.toString());
         }
 
+        _parsedDatesList = datesListing;
+
         return datesListing;
+    }
+
+    public List<String> getDatesList() {
+        List<String> retList = new ArrayList();
+        for (int i=0; i < _parsedDatesList.size(); i++) {
+            retList.add(_parsedDatesList.get(i).toString());
+        }
+        return retList;
+    }
+
+    public HashMap<String, List<String>> getServicesHashMap() {
+        HashMap<String, List<String>> retHash = new HashMap<>();
+        for (int i=0; i < _parsedDatesList.size(); i++) {
+            List<String> dateServices = new ArrayList<>();
+            AgesDate agesDate = _parsedDatesList.get(i);
+            for (int j=0; j < agesDate.services.size(); j++) {
+                dateServices.add(agesDate.services.get(j).toString());
+            }
+            retHash.put(agesDate.toString(), dateServices);
+            retHash.put(agesDate.toString(), dateServices);
+        }
+        return retHash;
     }
 
     private int parseMonthName(String m) {
@@ -113,6 +140,6 @@ public class ServicesIndexParser {
                 break;
         }
 
-        return monthInt;
+        return monthInt-1;
     }
 }

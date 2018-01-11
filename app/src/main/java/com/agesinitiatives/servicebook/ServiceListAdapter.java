@@ -94,6 +94,16 @@ public class ServiceListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
+    public void onGroupExpanded(int groupPosition) {
+        super.onGroupExpanded(groupPosition);
+    }
+
+    @Override
+    public void onGroupCollapsed(int groupPosition) {
+        super.onGroupCollapsed(groupPosition);
+    }
+
+    @Override
     public boolean hasStableIds() {
         return true;
     }
