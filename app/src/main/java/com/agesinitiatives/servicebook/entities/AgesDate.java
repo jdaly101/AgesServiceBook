@@ -1,5 +1,6 @@
 package com.agesinitiatives.servicebook.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class AgesDate {
     }
 
     public String toString() {
-        return date.toString();
+        SimpleDateFormat format = new SimpleDateFormat("EEE, MMM dd");
+        return format.format(date);
     }
 }
