@@ -1,6 +1,8 @@
 package com.agesinitiatives.servicebook;
 
+import android.app.ExpandableListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
 import com.agesinitiatives.servicebook.entities.AgesDate;
@@ -82,6 +85,18 @@ public class MainActivity extends AppCompatActivity
         final Context activityContext = this;
         serviceListAdapter = new ServiceListAdapter(activityContext, null, null);
         expandableListView = findViewById(R.id.expandableServiceList);
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Log.d(TAG, "Child click. Group: " + groupPosition + ", child: " + childPosition);
+
+                Intent intent = new Intent(activityContext, ScrollingActivity.class);
+                startActivity(intent);
+
+                return false;
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
