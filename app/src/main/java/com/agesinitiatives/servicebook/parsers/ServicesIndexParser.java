@@ -6,6 +6,7 @@ import com.agesinitiatives.servicebook.entities.AgesDate;
 import com.agesinitiatives.servicebook.entities.AgesService;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -58,7 +59,8 @@ public class ServicesIndexParser {
                         for (int m=0; m < servicesArray.length(); m++) {
                             JSONObject serviceObj = servicesArray.getJSONObject(m);
                             String serviceType = serviceObj.keys().next();
-                            agesServices.add(new AgesService(d, serviceType, "tmp"));
+                            String serviceUrl = getServiceTextUrl(serviceObj.getJSONArray(serviceType));
+                            agesServices.add(new AgesService(d, serviceType, serviceUrl));
                         }
 
                         datesListing.add(new AgesDate(d, agesServices));
@@ -91,9 +93,26 @@ public class ServicesIndexParser {
                 dateServices.add(agesDate.services.get(j).toString());
             }
             retHash.put(agesDate.toString(), dateServices);
-            retHash.put(agesDate.toString(), dateServices);
         }
         return retHash;
+    }
+
+    private String getServiceTextUrl(JSONArray serviceArray) {
+        String retString = "";
+        for (int i=0; i < serviceArray.length(); i++) {
+            try {
+                JSONObject serviceObj = serviceArray.getJSONObject(i);
+                String translationLangs = serviceObj.keys().next();
+                String serviceHref = serviceObj.getJSONArray(translationLangs).getJSONObject(0).getString("href");
+                String serviceType = serviceObj.getJSONArray(translationLangs).getJSONObject(0).getString("type");
+                if (serviceType.equalsIgnoreCase("Text/Music"))
+                    if (translationLangs.equalsIgnoreCase("GR-EN"))
+                        retString = serviceHref;
+            } catch (JSONException e) {
+                Log.e(TAG, e.toString());
+            }
+        }
+        return retString;
     }
 
     private int parseMonthName(String m) {
