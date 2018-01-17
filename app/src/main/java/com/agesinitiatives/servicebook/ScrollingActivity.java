@@ -37,14 +37,6 @@ public class ScrollingActivity extends AppCompatActivity {
 
         DocLoader docLoader = new DocLoader(serviceUrl);
         docLoader.execute();
-//        webView.loadData("<div><h1>Hello world!</h1><p>More content to follow</p></div>", "text/html", null);
-
-//        webView.getSettings().setBlockNetworkImage(true);
-//        webView.getSettings().setJavaScriptEnabled(false);
-//        webView.loadUrl(AGES_URL + serviceUrl);
-
-
-//        getWindow().requestFeature(Window.FEATURE_PROGRESS);
     }
 
     private class DocLoader extends AsyncTask<Void, Void, Void> {
