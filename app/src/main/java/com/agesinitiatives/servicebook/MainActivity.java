@@ -1,8 +1,9 @@
 package com.agesinitiatives.servicebook;
 
+import android.app.ExpandableListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
 import com.agesinitiatives.servicebook.entities.AgesDate;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String SERVICE_LIST_URL = "http://www.agesinitiatives.com/dcs/public/dcs/servicesindex.json";
     private static final String TAG = "MainActivity";
+    List<AgesDate> serviceDates;
     ExpandableListView expandableListView;
     ServiceListAdapter serviceListAdapter;
     RequestQueue queue;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         expandableListView = findViewById(R.id.expandableServiceList);
 
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity
                     public void onResponse(JSONObject response) {
                         Log.i(TAG, "Received JSON response");
                         ServicesIndexParser sip = new ServicesIndexParser(response);
-                        sip.parse();
+                        serviceDates = sip.parse();
 
                         serviceListAdapter = new ServiceListAdapter(
                                 context,
@@ -79,32 +82,39 @@ public class MainActivity extends AppCompatActivity
 
         queue.add(jsonObjectRequest);
 
-        final Context activityContext = this;
-        serviceListAdapter = new ServiceListAdapter(activityContext, null, null);
+        serviceListAdapter = new ServiceListAdapter(context, null, null);
         expandableListView = findViewById(R.id.expandableServiceList);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace me!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Log.d(TAG, "Child click. Group: " + groupPosition + ", child: " + childPosition);
+                Log.d(TAG, "Service clicked: " + serviceDates.get(groupPosition).services.get(childPosition).serviceType);
+                Log.d(TAG, "Service clicked: " + serviceDates.get(groupPosition).services.get(childPosition).serviceUrl);
+
+                Intent intent = new Intent(context, ServiceView.class);
+                intent.putExtra(
+                        "SERVICE_URL", serviceDates.get(groupPosition).services.get(childPosition).serviceUrl
+                );
+                startActivity(intent);
+
+                return false;
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -154,7 +164,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

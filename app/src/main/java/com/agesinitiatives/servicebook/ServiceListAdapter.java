@@ -49,7 +49,7 @@ public class ServiceListAdapter extends BaseExpandableListAdapter {
             );
             convertView = layoutInflater.inflate(R.layout.list_item, null);
         }
-        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.listItemText);
+        TextView expandedListTextView = convertView.findViewById(R.id.listItemText);
         expandedListTextView.setText(expandedListText);
         return convertView;
     }
@@ -87,7 +87,7 @@ public class ServiceListAdapter extends BaseExpandableListAdapter {
                     this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group, null);
         }
-        TextView listTitleTextView = (TextView) convertView.findViewById(R.id.listGroupText);
+        TextView listTitleTextView = convertView.findViewById(R.id.listGroupText);
         listTitleTextView.setText(listTitle);
 
         return convertView;
@@ -112,4 +112,6 @@ public class ServiceListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int listPosition, int expandedListPosition) {
         return true;
     }
+
+
 }
