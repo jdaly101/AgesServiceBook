@@ -9,6 +9,7 @@ import android.webkit.WebView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
@@ -25,6 +26,7 @@ public class ServiceView extends AppCompatActivity {
         setContentView(R.layout.activity_service_view);
 
         webView = findViewById(R.id.serviceWebView);
+        webView.getSettings().setJavaScriptEnabled(true);
 
         Intent intent = getIntent();
         serviceUrl = intent.getStringExtra("SERVICE_URL");
@@ -54,8 +56,17 @@ public class ServiceView extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            String html = doc.select(".content").first().outerHtml();
-            webView.loadDataWithBaseURL("file:///android_asset/.", html, "text/html", "UTF-8", null);
+            Element content = doc.select(".content").first();
+            content.appendElement("link")
+                    .attr("rel", "stylesheet")
+                    .attr("type", "text/css")
+                    .attr("href", "services.css");
+            content.appendElement("script")
+                    .attr("src", "jquery-3.2.1.min.js");
+            content.appendElement("script")
+                    .attr("src", "services.js");
+            String html = content.outerHtml();
+            webView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "UTF-8", null);
         }
     }
 }
