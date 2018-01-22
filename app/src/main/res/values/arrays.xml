@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="display_language_values">
+        <item>EN</item>
+        <item>GR</item>
+    </string-array>
+    <string-array name="service_font_size">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+</resources>
