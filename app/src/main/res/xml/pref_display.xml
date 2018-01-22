@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="night_mode"
+        android:title="Night Mode" />
+    <ListPreference
+        android:defaultValue="Medium"
+        android:entries="@array/service_font_size"
+        android:entryValues="@array/service_font_size"
+        android:key="service_font_size"
+        android:title="Service Font Size" />
+</PreferenceScreen>

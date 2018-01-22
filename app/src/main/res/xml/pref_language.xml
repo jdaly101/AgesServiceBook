@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:defaultValue="EN"
+        android:entries="@array/display_language_values"
+        android:entryValues="@array/display_language_values"
+        android:key="service_lang_preference"
+        android:title="Default Service Language" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="tap_swap_langs"
+        android:title="Tap to swap languages" />
+</PreferenceScreen>
