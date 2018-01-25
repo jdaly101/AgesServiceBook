@@ -1,7 +1,9 @@
 package com.agesinitiatives.servicebook;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,8 @@ public class ServiceView extends AppCompatActivity {
     private WebView webView;
     private String serviceUrl;
 
+    private String displayLang;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,9 @@ public class ServiceView extends AppCompatActivity {
 
         webView = findViewById(R.id.serviceWebView);
         webView.getSettings().setJavaScriptEnabled(true);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        displayLang = sharedPreferences.getString("service_lang_preference", "");
 
         Intent intent = getIntent();
         serviceUrl = intent.getStringExtra("SERVICE_URL");
@@ -61,6 +68,18 @@ public class ServiceView extends AppCompatActivity {
                     .attr("rel", "stylesheet")
                     .attr("type", "text/css")
                     .attr("href", "services.css");
+            if (displayLang.equals("EN")) {
+                content.appendElement("link")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "services-en.css");
+            } else if (displayLang.equals("GR")) {
+                content.appendElement("link")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "services-gr.css");
+            }
+
             content.appendElement("script")
                     .attr("src", "jquery-3.2.1.min.js");
             content.appendElement("script")
