@@ -4,7 +4,7 @@
 
     <ListPreference
         android:defaultValue="EN"
-        android:entries="@array/display_language_values"
+        android:entries="@array/display_language_keys"
         android:entryValues="@array/display_language_values"
         android:key="service_lang_preference"
         android:summary="%s"
