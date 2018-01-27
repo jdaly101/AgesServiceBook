@@ -24,6 +24,7 @@ public class ServiceView extends AppCompatActivity {
 
     private String displayLang;
     private String fontSize;
+    private boolean tapLangSwap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class ServiceView extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         displayLang = sharedPreferences.getString("service_lang_preference", "");
         fontSize = sharedPreferences.getString("service_font_size", "");
+        tapLangSwap = sharedPreferences.getBoolean("tap_swap_langs", false);
 
         Intent intent = getIntent();
         serviceUrl = intent.getStringExtra("SERVICE_URL");
@@ -103,6 +105,12 @@ public class ServiceView extends AppCompatActivity {
                     .attr("src", "jquery-3.2.1.min.js");
             content.appendElement("script")
                     .attr("src", "services.js");
+
+            if (tapLangSwap) {
+                content.appendElement("script")
+                        .attr("src", "langSwap.js");
+            }
+
             String html = content.outerHtml();
             webView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "UTF-8", null);
         }
