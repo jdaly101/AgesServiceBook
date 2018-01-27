@@ -23,6 +23,7 @@ public class ServiceView extends AppCompatActivity {
     private String serviceUrl;
 
     private String displayLang;
+    private String fontSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class ServiceView extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         displayLang = sharedPreferences.getString("service_lang_preference", "");
+        fontSize = sharedPreferences.getString("service_font_size", "");
 
         Intent intent = getIntent();
         serviceUrl = intent.getStringExtra("SERVICE_URL");
@@ -78,6 +80,23 @@ public class ServiceView extends AppCompatActivity {
                         .attr("rel", "stylesheet")
                         .attr("type", "text/css")
                         .attr("href", "services-gr.css");
+            }
+
+            if (fontSize.equals("Small")) {
+                content.appendElement("link")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "font-small.css");
+            } else if (fontSize.equals("Medium")) {
+                content.appendElement("link")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "font-medium.css");
+            } else if (fontSize.equals("Large")) {
+                content.appendElement("link")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "font-large.css");
             }
 
             content.appendElement("script")
