@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ServiceBook.iml" filepath="$PROJECT_DIR$/ServiceBook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AgesServiceBook.iml" filepath="$PROJECT_DIR$/AgesServiceBook.iml" />
+      <module fileurl="file://C:\Users\John\Documents\AGES\AgesServiceBook\ServiceBook.iml" filepath="C:\Users\John\Documents\AGES\AgesServiceBook\ServiceBook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
