@@ -4,6 +4,7 @@ import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         expandableListView = findViewById(R.id.expandableServiceList);
+
+        if (!PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean(PreferenceManager.KEY_HAS_SET_DEFAULT_VALUES, false)) {
+            PreferenceManager.setDefaultValues(this, R.xml.pref_display, true);
+            PreferenceManager.setDefaultValues(this, R.xml.pref_language, true);
+        }
+
+
 
         queue = Volley.newRequestQueue(this);
 
