@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         expandableListView = findViewById(R.id.expandableServiceList);
-        System.out.println("foo");
 
         if (!PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean(PreferenceManager.KEY_HAS_SET_DEFAULT_VALUES, false)) {
