@@ -52,6 +52,7 @@ public class ServicesIndexParser {
                                 this.parseMonthName(monthStr),
                                 Integer.parseInt(dateNum )
                         );
+
                         Date d = calendar.getTime();
 
                         List<AgesService> agesServices = new ArrayList();
@@ -82,6 +83,20 @@ public class ServicesIndexParser {
             retList.add(_parsedDatesList.get(i).toString());
         }
         return retList;
+    }
+
+    public int getClosestDateIndex() {
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        if (_parsedDatesList.size() > 1) {
+            for (int i=0; i < _parsedDatesList.size()-1; i++) {
+                if ((today.compareTo(_parsedDatesList.get(i).date) >= 0)
+                        && (today.compareTo(_parsedDatesList.get(i+1).date) < 0)) {
+                    return i;
+                }
+            }
+        }
+        return 0;
     }
 
     public HashMap<String, List<String>> getServicesHashMap() {
