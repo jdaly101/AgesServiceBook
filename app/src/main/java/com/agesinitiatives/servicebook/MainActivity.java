@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity
                                 sip.getServicesHashMap()
                         );
                         expandableListView.setAdapter(serviceListAdapter);
+                        scrollToToday(sip.getClosestDateIndex());
                     }
                 },
                 new Response.ErrorListener() {
@@ -173,5 +174,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void scrollToToday(int i) {
+        long packedPosition = expandableListView.getPackedPositionForChild(i, 1);
+        int flatPosition = expandableListView.getFlatListPosition(packedPosition);
+        expandableListView.setSelection(flatPosition);
     }
 }
