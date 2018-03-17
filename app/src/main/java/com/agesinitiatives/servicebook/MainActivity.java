@@ -27,9 +27,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final String SERVICE_LIST_URL = "http://www.agesinitiatives.com/dcs/public/dcs/servicesindex.json";
     private static final String TAG = "MainActivity";
+    private static final int RC_SIGN_IN = 456;
+    private FirebaseAuth mAuth;
     List<AgesDate> serviceDates;
     ExpandableListView expandableListView;
     ServiceListAdapter serviceListAdapter;
@@ -50,13 +55,15 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         expandableListView = findViewById(R.id.expandableServiceList);
 
+        Log.i(TAG, "Getting Firebase instance");
+        mAuth = FirebaseAuth.getInstance();
+
+        Log.i(TAG, "Getting preferences");
         if (!PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean(PreferenceManager.KEY_HAS_SET_DEFAULT_VALUES, false)) {
             PreferenceManager.setDefaultValues(this, R.xml.pref_display, true);
             PreferenceManager.setDefaultValues(this, R.xml.pref_language, true);
         }
-
-
 
         queue = Volley.newRequestQueue(this);
 
@@ -159,21 +166,48 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        final Context context = getApplicationContext();
 
         if (id == R.id.nav_about) {
-            final Context context = getApplicationContext();
+            // final Context context = getApplicationContext();
             Intent intent = new Intent(context, AboutActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
-            final Context context = getApplicationContext();
+//            final Context context = getApplicationContext();
             Intent intent = new Intent(context, SettingsActivity.class);
             startActivity(intent);
-
+        } else if (id == R.id.nav_user) {
+            if (mAuth.getCurrentUser() != null) {
+                Intent intent = new Intent(context, UserActivity.class);
+                startActivity(intent);
+            } else {
+                Log.i(TAG, "Trying to use FirebaseUI");
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()
+                );
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .build(),
+                        RC_SIGN_IN
+                );
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+
+        }
     }
 
     public void scrollToToday(int i) {
