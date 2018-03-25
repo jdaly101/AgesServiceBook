@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="40sp"
+        android:paddingRight="40sp"
         android:paddingVertical="10sp"
         android:text="TextView"
         android:textAlignment="viewStart"

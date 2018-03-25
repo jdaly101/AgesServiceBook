@@ -8,25 +8,66 @@
     tools:context="com.agesinitiatives.servicebook.UserActivity"
     tools:showIn="@layout/activity_user">
 
-    <TextView
-        android:id="@+id/userNameDisplay"
+    <Spinner
+        android:id="@+id/archdiocese_spinner"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editUserName" />
+
+    <EditText
+        android:id="@+id/editUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="User activity!"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/name_field_label"
+        android:inputType="textPersonName"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/persona_spinner"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/archdiocese_spinner" />
+
+    <EditText
+        android:id="@+id/editUserParish"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/parish_field_label"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/persona_spinner" />
+
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/userSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="logoutPressed"
-        android:text="Logout"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="305dp" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:onClick="saveUserInfo"
+        android:text="@string/save_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editUserParish" />
+
 </android.support.constraint.ConstraintLayout>
