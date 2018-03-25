@@ -14,4 +14,26 @@
     <string name="about_subheader">Powered by AGES Initiatives</string>
     <string name="about_text">The Service Book App contains the daily services, both the fixed and movable parts, in Greek and in English.</string>
     <string name="title_activity_user">UserActivity</string>
+
+    <string name="name_field_label">Your Name</string>
+    <string name="archdiocese_field_label">Your Archdiocese</string>
+    <string name="personal_field_label">Your role</string>
+    <string name="parish_field_label">Your parish</string>
+    <string name="save_button">Save</string>
+
+    <string-array name="user_archdiocese">
+        <item>Antiochian</item>
+        <item>GOA</item>
+        <item>OCA</item>
+        <item>ROCOR</item>
+        <item>Romanian</item>
+        <item>Serbian</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="user_persona">
+        <item>Clergy</item>
+        <item>Chanter/Choir</item>
+        <item>Layperson</item>
+    </string-array>
 </resources>
