@@ -1,6 +1,6 @@
 package com.agesinitiatives.servicebook.entities;
 
-import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,6 +16,11 @@ public class AgesService {
         this.date = date;
         this.serviceType = serviceType;
         this.serviceUrl = serviceUrl;
+    }
+
+    public String getTitle() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd - ");
+        return sdf.format(date) + serviceType;
     }
 
     public String toString() {

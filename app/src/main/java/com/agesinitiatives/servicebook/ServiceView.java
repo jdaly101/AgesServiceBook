@@ -21,9 +21,11 @@ public class ServiceView extends AppCompatActivity {
     private static final String BASE_AGES_URL = "http://www.agesinitiatives.com/dcs/public/dcs/";
     private WebView webView;
     private String serviceUrl;
+    private String serviceTitle;
 
     private String displayLang;
     private String fontSize;
+    private boolean nightMode;
     private boolean tapLangSwap;
 
     @Override
@@ -37,11 +39,14 @@ public class ServiceView extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         displayLang = sharedPreferences.getString("service_lang_preference", "");
         fontSize = sharedPreferences.getString("service_font_size", "");
+        nightMode = sharedPreferences.getBoolean("night_mode", false);
         tapLangSwap = sharedPreferences.getBoolean("tap_swap_langs", false);
 
         Intent intent = getIntent();
-        serviceUrl = intent.getStringExtra("SERVICE_URL");
-        Log.i(TAG, "SERVICE URL: " + serviceUrl);
+        Bundle extras = intent.getExtras();
+        serviceUrl = extras.getString("SERVICE_URL");
+        serviceTitle = extras.getString("SERVICE_TITLE");
+        setTitle(serviceTitle);
 
         DocLoader docLoader = new DocLoader();
         docLoader.execute();
@@ -72,6 +77,17 @@ public class ServiceView extends AppCompatActivity {
                     .attr("rel", "stylesheet")
                     .attr("type", "text/css")
                     .attr("href", "services.css");
+            if (nightMode) {
+                content.appendElement("link")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "services-night.css");
+            } else {
+                content.appendElement("link")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "services-day.css");
+            }
             if (displayLang.equals("EN")) {
                 content.appendElement("link")
                         .attr("rel", "stylesheet")

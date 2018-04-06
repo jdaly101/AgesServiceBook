@@ -1,11 +1,9 @@
 package com.agesinitiatives.servicebook;
 
-import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
 import com.agesinitiatives.servicebook.entities.AgesDate;
@@ -55,10 +52,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         expandableListView = findViewById(R.id.expandableServiceList);
 
-        Log.i(TAG, "Getting Firebase instance");
         mAuth = FirebaseAuth.getInstance();
 
-        Log.i(TAG, "Getting preferences");
         if (!PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean(PreferenceManager.KEY_HAS_SET_DEFAULT_VALUES, false)) {
             PreferenceManager.setDefaultValues(this, R.xml.pref_display, true);
@@ -105,16 +100,12 @@ public class MainActivity extends AppCompatActivity
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Log.d(TAG, "Child click. Group: " + groupPosition + ", child: " + childPosition);
-                Log.d(TAG, "Service clicked: " + serviceDates.get(groupPosition).services.get(childPosition).serviceType);
-                Log.d(TAG, "Service clicked: " + serviceDates.get(groupPosition).services.get(childPosition).serviceUrl);
-
                 Intent intent = new Intent(context, ServiceView.class);
-                intent.putExtra(
-                        "SERVICE_URL", serviceDates.get(groupPosition).services.get(childPosition).serviceUrl
-                );
+                Bundle extras = new Bundle();
+                extras.putString("SERVICE_URL", serviceDates.get(groupPosition).services.get(childPosition).serviceUrl);
+                extras.putString("SERVICE_TITLE", serviceDates.get(groupPosition).services.get(childPosition).getTitle());
+                intent.putExtras(extras);
                 startActivity(intent);
-
                 return false;
             }
         });
@@ -169,11 +160,9 @@ public class MainActivity extends AppCompatActivity
         final Context context = getApplicationContext();
 
         if (id == R.id.nav_about) {
-            // final Context context = getApplicationContext();
             Intent intent = new Intent(context, AboutActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
-//            final Context context = getApplicationContext();
             Intent intent = new Intent(context, SettingsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_user) {
@@ -181,7 +170,6 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(context, UserActivity.class);
                 startActivity(intent);
             } else {
-                Log.i(TAG, "Trying to use FirebaseUI");
                 List<AuthUI.IdpConfig> providers = Arrays.asList(
                         new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                         new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()

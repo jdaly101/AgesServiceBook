@@ -18,7 +18,7 @@ public class AgesDate {
     }
 
     public String toString() {
-        SimpleDateFormat format = new SimpleDateFormat("EEE, MMM dd");
+        SimpleDateFormat format = new SimpleDateFormat("MMM dd - EEEE");
         return format.format(date);
     }
 }
