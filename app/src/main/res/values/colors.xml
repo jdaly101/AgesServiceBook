@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="zDarkBlue">#2B294B</color>
+    <color name="zMidBlue">#0083A3</color>
+    <color name="zLightBlue">#00ABC9</color>
+    <color name="zSlightGreen">#BFE3DC</color>
+    <color name="zSeaGreen">#0EA997</color>
+    <color name="zLightOrange">#FBF8CF</color>
+    <color name="zOrange">#FBB145</color>
+    <color name="zDarkOrange">#C67330</color>
+    <color name="black">#000000</color>
 </resources>
