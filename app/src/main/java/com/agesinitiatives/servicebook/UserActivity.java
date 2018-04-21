@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class UserActivity extends AppCompatActivity {
     protected EditText editUserParish;
     protected Spinner archdioceseSpinner;
     protected Spinner personaSpinner;
+    protected Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class UserActivity extends AppCompatActivity {
 
         editUserName = findViewById(R.id.editUserName);
         editUserParish = findViewById(R.id.editUserParish);
+        saveButton = findViewById(R.id.userSaveButton);
 
         archdioceseSpinner = findViewById(R.id.archdiocese_spinner);
         ArrayAdapter<CharSequence> archdioceseAdapter = ArrayAdapter.createFromResource(this,
@@ -85,6 +88,7 @@ public class UserActivity extends AppCompatActivity {
 
     public void saveUserInfo(View view) {
         Log.i(TAG, "Saving user info...");
+        saveButton.setEnabled(false);
         Map<String, Object> userRecord = new HashMap<>();
         userRecord.put("userId", user.getUid());
 
@@ -111,28 +115,33 @@ public class UserActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d(TAG, "Document added");
+                            saveButton.setEnabled(true);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.d(TAG, "Error adding document", e);
+                            saveButton.setEnabled(true);
                         }
                     });
+
         } else {
             db.collection("users")
                     .document(userDocument.getId())
-                    .set(userRecord)
+                    .update(userRecord)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "Document added or updated");
+                            saveButton.setEnabled(true);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.d(TAG, "Error adding document", e);
+                            saveButton.setEnabled(true);
                         }
                     });
         }
