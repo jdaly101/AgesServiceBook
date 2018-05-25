@@ -16,8 +16,8 @@
     <string name="title_activity_user">UserActivity</string>
 
     <string name="name_field_label">Your Name</string>
-    <string name="archdiocese_field_label">Your Archdiocese</string>
-    <string name="personal_field_label">Your role</string>
+    <string name="jurisdiction_field_label">Jurisdiction</string>
+    <string name="persona_field_label">Role</string>
     <string name="parish_field_label">Your parish</string>
     <string name="save_button">Save</string>
 

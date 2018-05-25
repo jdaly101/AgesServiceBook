@@ -61,7 +61,11 @@ public class ServicesIndexParser {
                             JSONObject serviceObj = servicesArray.getJSONObject(m);
                             String serviceType = serviceObj.keys().next();
                             String serviceUrl = getServiceTextUrl(serviceObj.getJSONArray(serviceType));
-                            agesServices.add(new AgesService(d, serviceType, serviceUrl));
+                            if ((serviceType.equals("Divine Liturgy - Variable Parts") == false) &&
+                                    (serviceType.equals("Matins - Customizable") == false) &&
+                                    (serviceType.equals("Presanctified Liturgy - Variable Parts") == false)) {
+                                agesServices.add(new AgesService(d, serviceType, serviceUrl));
+                            }
                         }
 
                         datesListing.add(new AgesDate(d, agesServices));
