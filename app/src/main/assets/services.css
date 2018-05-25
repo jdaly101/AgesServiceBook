@@ -1,5 +1,10 @@
+/*
 .boldred {
     color: red;
+}
+
+p[class^="bmc_"], p[class^="emc_"] {
+  display: none;
 }
 
 .bmc_collapse {
@@ -69,4 +74,455 @@ p.hymn:first-letter {
     color: red;
     font-size: 1.2em;
     font-weight: normal;
+}
+
+*/
+
+html, body {
+    background-color: #FBF0D9;
+}
+
+
+.boldred {
+    color: red;
+}
+
+p[class^="bmc_"], p[class^="emc_"] {
+  display: none;
+}
+
+.bmc_collapse {
+    display: none;
+}
+
+p.emc_collapse {
+    display:block;
+    text-align:center;
+    font-style:normal;
+    font-size:90%;
+    color:blue;
+    line-height:100%;
+    margin-top: 12px;
+    margin-bottom: 3px;
+}
+
+.emc_collapse:hover {
+	cursor: pointer;
+}
+
+p.bmc_collapse {
+    display:block;
+	text-align:center;
+    font-style:normal;
+    font-size:90%;
+    color:blue;
+    line-height:100%;
+    margin-bottom: 12px;
+}
+
+.bmc_collapse:hover {
+	cursor: pointer;
+}
+
+.media-group {
+    display: none;
+}
+
+title, p.designation, p.mixed, p.mode, p.melody {
+    text-align: center;
+    font-size: 95%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+p.actor {
+    font-size: 80%;
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+p.actor:first-letter {
+    font-size: 125%;
+}
+
+p.alttext {
+	font-size:80%;
+	background-color:#CCCCCC;
+	margin-left:2em;
+}
+
+p.break {
+    margin-bottom: 10px;
+}
+
+p.chant {
+    text-align:left;
+    text-indent: 0px;
+    line-height:150%;
+    margin-bottom: 10px;
+}
+
+p.chant:first-letter {
+    color:red;
+    font-size:180%;
+    font-weight:normal;
+}
+
+p.chapverse {
+    font-weight:normal;
+    font-style:italic;
+    text-indent: 0px;
+    text-align:center;
+    color:red;
+    font-size: 80%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+p.designation {
+    color: red;
+    font-weight: bold;
+}
+
+p.dialogzero {
+    text-align:left;
+    text-indent: 28px;
+    font-size:95%;
+    line-height:130%;
+    margin-bottom: 0px;
+}
+
+p.dialog {
+    text-align:left;
+    text-indent: 28px;
+    font-size:95%;
+    line-height:130%;
+    margin-bottom: 5px;
+}
+
+p.heirmos {
+    text-align:left;
+    text-indent: 0px;
+    line-height:150%;
+    margin-bottom: 10px;
+}
+
+p.heirmos:first-letter {
+    color:red;
+    font-size:180%;
+    font-weight:normal;
+}
+
+p.hymn {
+    text-align:left;
+    text-indent: 0px;
+    line-height:150%;
+    margin-bottom: 10px;
+}
+
+p.hymn:first-letter {
+    color:red;
+    font-size:180%;
+    font-weight:normal;
+}
+
+p.hymnlinefirst {
+    text-align:left;
+    text-indent: 0px;
+    line-height:150%;
+    margin-bottom: 0;
+}
+
+p.hymnlinefirst:first-letter {
+    color:red;
+    font-size:180%;
+    font-weight:bold;
+}
+
+p.hymnlinemiddle {
+    text-align:left;
+    text-indent: 0px;
+    line-height:150%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+p.hymnlinelast {
+    text-align:left;
+    text-indent: 0px;
+    line-height:150%;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+p.inaudible {
+    text-indent: 28px;
+	font-size:80%;
+    text-align:left;
+    line-height:150%;
+}
+
+.italics {
+    font-style: italic;
+}
+
+p.melody {
+    font-weight:normal;
+    font-style:italic;
+    color:red;
+}
+
+p.mode {
+    color: red;
+    font-weight: bold;
+}
+
+p.name {
+    font-weight:normal;
+    font-style:italic;
+    text-align:center;
+    color:red;
+    font-size: 80%;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.optional {
+    font-style:italic;
+}
+
+p.plain {
+    font-weight:normal;
+    font-style:normal;
+}
+
+p.prayerzero {
+    text-align:left;
+    text-indent: 28px;
+    line-height:150%;
+    margin-bottom: 0px;
+}
+
+p.prayer {
+    text-align:left;
+    text-indent: 28px;
+    line-height:150%;
+    margin-bottom: 6px;
+}
+
+p.readingzero {
+    text-align:left;
+    text-indent: 28px;
+    line-height:150%;
+    margin-bottom: 0px;
+}
+
+p.reading {
+    text-align:left;
+    text-indent: 28px;
+    line-height:150%;
+    margin-bottom: 6px;
+}
+
+p.readingcenterzero {
+    text-align:center;
+	font-size:100%;
+    line-height:150%;
+    margin-bottom: 0px;
+}
+
+p.readingcenter {
+    text-align:center;
+	font-size:100%;
+    line-height:150%;
+    margin-bottom: 6px;
+}
+
+p.rubric {
+    color:red;
+    font-size:80%;
+    font-style:italic;
+    text-align:left;
+    text-indent: 28px;
+}
+
+p.small {
+    text-align:inherit;
+    font-size:70%;
+    font-weight:bold;
+    color:red;
+  	margin-top: 3px;
+  	margin-bottom: 3px;
+}
+
+p.smallcenter {
+    text-align:center;
+    font-size:70%;
+    font-weight:bold;
+    color:red;
+  	margin-top: 3px;
+  	margin-bottom: 3px;
+}
+
+.source {
+    margin-top: 6px;
+    font-size: 70%;
+	font-weight:lighter;
+    color: gray;
+}
+
+.source0 {
+    font-size: 70%;
+    color: gray;
+	font-weight:lighter;
+    height: 0;
+    position: relative;
+    top: -3em;
+}
+
+.source1 {
+    font-size: 70%;
+    color: gray;
+	font-weight:lighter;
+    height: 0;
+    position: relative;
+    top: -6em;
+}
+
+p.titlezero {
+	text-align:center;
+	font-style:normal;
+    font-weight:bolder;
+    color:red;
+    font-size:80%;
+  	margin-top: -7px;
+  	margin-bottom: 0px;
+}
+
+p.verse {
+    text-align:left;
+    text-indent: 28px;
+    font-style:italic;
+    font-size:100%;
+    line-height:150%;
+    margin-bottom: 3px;
+}
+p.versecenter {
+    text-align:center;
+    font-style:italic;
+    font-size:90%;
+    line-height:100%;
+    margin-bottom: 3px;
+}
+
+span.anum {
+	color: red;
+    font-size:80%;
+}
+
+span.melody {
+	font-style:italic;
+	color:red;
+	white-space: normal;
+}
+
+span.mode {
+	font-style:normal;
+	font-weight:bolder;
+	color:red;
+	white-space: normal;
+}
+
+span.designation {
+	font-style:normal;
+	font-weight:bolder;
+	color:red;
+	white-space: normal;
+}
+
+span.reference{
+	font-variant:normal;
+	font-weight:normal;
+	font-style:italic;
+	font-size:70%;
+	color:red;
+}
+
+span.rubric{
+	font-variant:normal;
+	font-weight:normal;
+	font-style:italic;
+	font-size:80%;
+	color:red;
+}
+
+span.italics {
+	font-style:italic;
+}
+
+span.strong {
+	font-weight:bold;
+}
+
+span.bigblack {
+	font-weight:normal;
+	font-style:normal;
+	font-size:150%;
+	display:inline-block;
+	line-height:150%;
+	color:black;
+}
+span.black {
+	font-style:normal;
+	color:black;
+}
+
+span.bold {
+	font-weight:bold;
+	font-style:inherit;
+}
+span.bolditalics {
+	font-weight:bold;
+	font-style:italic;
+}
+span.red {
+	font-style:inherit;
+	color:red;
+}
+
+span.boldred {
+	font-weight:bold;
+	color:red;
+	font-style:inherit;
+}
+
+span.italicsblack {
+	font-style:italic;
+	color:black;
+}
+span.italicsred {
+	font-style:italic;
+	color:red;
+}
+
+span.bolditalicsred {
+	font-weight:bold;
+	font-style:italic;
+	color:red;
+}
+
+span.numright {
+	font-style:inherit;
+	float: right;
+	color:red;
+}
+
+span.versiondesignation {
+	font-style:normal;
+	font-weight:lighter;
+	font-size:50%;
+	vertical-align:middle;
+	color: gray;
+	float: right;
 }

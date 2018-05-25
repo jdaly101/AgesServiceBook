@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:defaultValue="EN"
+        android:entries="@array/display_language_keys"
+        android:entryValues="@array/display_language_values"
+        android:key="service_lang_preference"
+        android:summary="%s"
+        android:title="Default Service Language" />
+    <ListPreference
+        android:defaultValue="Medium"
+        android:entries="@array/service_font_size"
+        android:entryValues="@array/service_font_size"
+        android:key="service_font_size"
+        android:summary="%s"
+        android:title="Service Font Size" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="tap_swap_langs"
+        android:title="Tap to swap languages" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="night_mode"
+        android:title="Night Mode" />
+
+</PreferenceScreen>

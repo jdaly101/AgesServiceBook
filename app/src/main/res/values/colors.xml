@@ -12,4 +12,5 @@
     <color name="zOrange">#FBB145</color>
     <color name="zDarkOrange">#C67330</color>
     <color name="black">#000000</color>
+    <color name="zDarkGray">#333333</color>
 </resources>

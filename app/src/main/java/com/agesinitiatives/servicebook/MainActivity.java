@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     private static final String SERVICE_LIST_URL = "http://www.agesinitiatives.com/dcs/public/dcs/servicesindex.json";
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 456;
+    private static int prev = -1;
     private FirebaseAuth mAuth;
     List<AgesDate> serviceDates;
     ExpandableListView expandableListView;
@@ -56,8 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         if (!PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean(PreferenceManager.KEY_HAS_SET_DEFAULT_VALUES, false)) {
-            PreferenceManager.setDefaultValues(this, R.xml.pref_display, true);
-            PreferenceManager.setDefaultValues(this, R.xml.pref_language, true);
+            PreferenceManager.setDefaultValues(this, R.xml.prefs_all, true);
         }
 
         queue = Volley.newRequestQueue(this);
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "Received JSON response");
                         ServicesIndexParser sip = new ServicesIndexParser(response);
                         serviceDates = sip.parse();
 
@@ -96,6 +95,16 @@ public class MainActivity extends AppCompatActivity
 
         serviceListAdapter = new ServiceListAdapter(context, null, null);
         expandableListView = findViewById(R.id.expandableServiceList);
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int i) {
+                if ((prev != -1) && (prev != i)) {
+                    expandableListView.collapseGroup(prev);
+                }
+                prev = i;
+            }
+        });
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -143,10 +152,14 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        final Context context = getApplicationContext();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(context, SettingsActivity.class);
+            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.AllPrefsFragment.class.getName());
+            intent.putExtra(SettingsActivity.EXTRA_NO_HEADERS, true);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -161,9 +174,6 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_about) {
             Intent intent = new Intent(context, AboutActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(context, SettingsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_user) {
             if (mAuth.getCurrentUser() != null) {

@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,6 +38,7 @@ public class UserActivity extends AppCompatActivity {
     protected Spinner archdioceseSpinner;
     protected Spinner personaSpinner;
     protected Button saveButton;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +67,15 @@ public class UserActivity extends AppCompatActivity {
         personaAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         personaSpinner.setAdapter(personaAdapter);
 
+        progressBar = findViewById(R.id.progressBar1);
+        progressBar.setVisibility(View.VISIBLE);
         db.collection("users")
                 .whereEqualTo("userId", user.getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             // TODO: Check if more than one record is returned
                             for (DocumentSnapshot document : task.getResult()) {
@@ -87,7 +91,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void saveUserInfo(View view) {
-        Log.i(TAG, "Saving user info...");
+        progressBar.setVisibility(View.VISIBLE);
         saveButton.setEnabled(false);
         Map<String, Object> userRecord = new HashMap<>();
         userRecord.put("userId", user.getUid());
@@ -115,6 +119,7 @@ public class UserActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d(TAG, "Document added");
+                            progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
                     })
@@ -122,6 +127,7 @@ public class UserActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.d(TAG, "Error adding document", e);
+                            progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
                     });
@@ -134,6 +140,7 @@ public class UserActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "Document added or updated");
+                            progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
                     })
@@ -141,6 +148,7 @@ public class UserActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.d(TAG, "Error adding document", e);
+                            progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
                     });

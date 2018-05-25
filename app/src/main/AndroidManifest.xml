@@ -34,11 +34,6 @@
             android:name=".UserActivity"
             android:parentActivityName=".MainActivity" />
 
-        <!--activity
-            android:name=".UserActivity"
-            android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity"></activity-->
     </application>
 
 </manifest>

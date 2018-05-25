@@ -2,13 +2,18 @@
 
     <!-- These settings headers are only used on tablets. -->
     <header
-        android:fragment="com.agesinitiatives.servicebook.SettingsActivity$LanguagePreferenceFragment"
+        android:fragment="com.agesinitiatives.servicebook.SettingsActivity$AllPrefsFragment"
         android:icon="@drawable/ic_flag_black_24dp"
-        android:title="Languages" />
+        android:title="Preferences"
+        />
+    <!--<header-->
+        <!--android:fragment="com.agesinitiatives.servicebook.SettingsActivity$LanguagePreferenceFragment"-->
+        <!--android:icon="@drawable/ic_flag_black_24dp"-->
+        <!--android:title="Languages" />-->
 
-    <header
-        android:fragment="com.agesinitiatives.servicebook.SettingsActivity$DisplayPreferenceFragment"
-        android:icon="@drawable/ic_desktop_windows_black_24dp"
-        android:title="Display" />
+    <!--<header-->
+        <!--android:fragment="com.agesinitiatives.servicebook.SettingsActivity$DisplayPreferenceFragment"-->
+        <!--android:icon="@drawable/ic_desktop_windows_black_24dp"-->
+        <!--android:title="Display" />-->
 
 </preference-headers>
