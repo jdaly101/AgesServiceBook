@@ -1,6 +1,14 @@
-body {
+html, body {
     background-color: black;
     color: #fcefd2;
 }
 
+tr, td {
+    background-color: black;
+    color: fcefd2;
+}
 
+.actor, .mixed, .prayer, .rubric, .inaudible {
+    background-color: black;
+    color: fcefd2;
+}

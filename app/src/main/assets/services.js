@@ -5,7 +5,7 @@ $("tr:has(.emc_collapse)").hide();
 
 $("tr:has(.bmc_collapse)").click(function() {
 	$(this).nextUntil('tr:has(.emc_collapse)').show();
-	$(this).nextUntil('tr:has(.emc_collapse)').css("background-color", "#FDF6E7");
+	$(this).nextUntil('tr:has(.emc_collapse)');
 	$(this).hide();
 	$(this).nextAll('tr:has(.emc_collapse):first').show();
 });

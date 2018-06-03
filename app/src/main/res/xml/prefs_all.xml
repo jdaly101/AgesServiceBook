@@ -15,7 +15,7 @@
         android:entryValues="@array/service_font_size"
         android:key="service_font_size"
         android:summary="%s"
-        android:title="Service Font Size" />
+        android:title="Font Size" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="tap_swap_langs"
