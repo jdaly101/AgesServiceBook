@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Error receiving JSON response");
+//                        Log.e(TAG, "Error receiving JSON response");
                     }
                 }
         );

@@ -48,11 +48,6 @@ public class ServiceView extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
 
         refreshPreferences();
-//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        displayLang = sharedPreferences.getString("service_lang_preference", "");
-//        fontSize = sharedPreferences.getString("service_font_size", "");
-//        nightMode = sharedPreferences.getBoolean("night_mode", false);
-//        tapLangSwap = sharedPreferences.getBoolean("tap_swap_langs", false);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -121,7 +116,7 @@ public class ServiceView extends AppCompatActivity {
                 doc.body().getElementsByTag("a").remove();
                 doc.body().getElementsByTag("i").remove();
             } catch (IOException e) {
-                Log.e(TAG, e.toString());
+//                Log.e(TAG, e.toString());
             }
             return null;
         }
