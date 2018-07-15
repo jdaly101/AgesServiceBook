@@ -79,11 +79,11 @@ public class UserActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // TODO: Check if more than one record is returned
                             for (DocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
                                 setDocument(document);
                             }
                         } else {
-                            Log.i(TAG, "Error retrieving document", task.getException());
+//                            Log.i(TAG, "Error retrieving document", task.getException());
                         }
                     }
                 });
@@ -118,7 +118,7 @@ public class UserActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "Document added");
+//                            Log.d(TAG, "Document added");
                             progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
@@ -126,7 +126,7 @@ public class UserActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "Error adding document", e);
+//                            Log.d(TAG, "Error adding document", e);
                             progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
@@ -156,7 +156,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void setDocument(DocumentSnapshot document) {
-        Log.d(TAG, "Setting document: " + document.getId());
+//        Log.d(TAG, "Setting document: " + document.getId());
         userDocument = document;
         editUserName = findViewById(R.id.editUserName);
         if (userDocument.getData().get("displayName") != null) {

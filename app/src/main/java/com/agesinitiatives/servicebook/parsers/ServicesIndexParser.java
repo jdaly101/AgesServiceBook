@@ -73,7 +73,7 @@ public class ServicesIndexParser {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG, "Error during service list parsing: " + e.toString());
+//            Log.e(TAG, "Error during service list parsing: " + e.toString());
         }
 
         _parsedDatesList = datesListing;
@@ -128,7 +128,7 @@ public class ServicesIndexParser {
                     if (translationLangs.equalsIgnoreCase("GR-EN"))
                         retString = serviceHref;
             } catch (JSONException e) {
-                Log.e(TAG, e.toString());
+//                Log.e(TAG, e.toString());
             }
         }
         return retString;
