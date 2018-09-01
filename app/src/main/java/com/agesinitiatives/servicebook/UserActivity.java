@@ -28,8 +28,10 @@ import java.util.Map;
 public class UserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private boolean hasInfoDoc = false;
     private FirebaseUser user;
     private DocumentSnapshot userDocument;
+    private String userDocId;
     private String TAG = "UserActivity";
 
     /* UI components */
@@ -69,6 +71,7 @@ public class UserActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.VISIBLE);
+
         db.collection("users")
                 .whereEqualTo("userId", user.getUid())
                 .get()
@@ -77,17 +80,32 @@ public class UserActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            // TODO: Check if more than one record is returned
                             for (DocumentSnapshot document : task.getResult()) {
-//                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                hasInfoDoc = true;
                                 setDocument(document);
                             }
                         } else {
-//                            Log.i(TAG, "Error retrieving document", task.getException());
+
                         }
                     }
                 });
 
+    }
+
+    public void setDocById(String docId) {
+        Log.i(TAG, "SetDocById: " + docId);
+        db.collection("users")
+                .whereEqualTo("userId", docId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        progressBar.setVisibility(View.GONE);
+                        for (DocumentSnapshot document : task.getResult()) {
+                            setDocument(document);
+                        }
+                    }
+                });
     }
 
     public void saveUserInfo(View view) {
@@ -112,13 +130,15 @@ public class UserActivity extends AppCompatActivity {
         String persona = personaSpinner.getSelectedItem().toString();
         userRecord.put("persona", persona);
 
-        if (userDocument == null) {
+        if (hasInfoDoc == false) {
             db.collection("users")
                     .add(userRecord)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-//                            Log.d(TAG, "Document added");
+                            hasInfoDoc = true;
+                            userDocId = documentReference.getId();
+                            setDocById(userDocId);
                             progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
@@ -126,7 +146,6 @@ public class UserActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-//                            Log.d(TAG, "Error adding document", e);
                             progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
@@ -134,12 +153,11 @@ public class UserActivity extends AppCompatActivity {
 
         } else {
             db.collection("users")
-                    .document(userDocument.getId())
+                    .document(userDocId)
                     .update(userRecord)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "Document added or updated");
                             progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
@@ -147,7 +165,6 @@ public class UserActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "Error adding document", e);
                             progressBar.setVisibility(View.GONE);
                             saveButton.setEnabled(true);
                         }
@@ -156,7 +173,6 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void setDocument(DocumentSnapshot document) {
-//        Log.d(TAG, "Setting document: " + document.getId());
         userDocument = document;
         editUserName = findViewById(R.id.editUserName);
         if (userDocument.getData().get("displayName") != null) {
