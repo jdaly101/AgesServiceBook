@@ -192,6 +192,9 @@ public class MainActivity extends AppCompatActivity
                         RC_SIGN_IN
                 );
             }
+        } else if (id == R.id.nav_privacy) {
+            Intent intent = new Intent(context, PrivacyActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
