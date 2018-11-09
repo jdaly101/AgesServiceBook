@@ -14,7 +14,8 @@
     <string name="title_about">About</string>
     <string name="about_headline">The Service Book App</string>
     <string name="about_subheader">Powered by AGES Initiatives</string>
-    <string name="about_text">The Service Book App contains the daily services, both the fixed and movable parts, in Greek and in English.</string>
+    <string name="about_text">The Service Book App contains the daily services, both the fixed and movable parts, in Greek and in English.\n\n
+    AGES Initiatives is sponsored completely by donations from users like you. Please consider donating through the link below.</string>
     <string name="title_activity_user">UserActivity</string>
 
     <string name="name_field_label">Your Name</string>

@@ -14,6 +14,7 @@
             android:title="@string/nav_about" />
         <item
             android:id="@+id/nav_privacy"
+            android:icon="@drawable/ic_lock_black_24dp"
             android:title="@string/nav_privacy" />
     </group>
 
