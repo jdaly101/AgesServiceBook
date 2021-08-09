@@ -1,5 +1,6 @@
 package com.agesinitiatives.servicebook;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String SERVICE_LIST_URL = "http://www.agesinitiatives.com/dcs/public/dcs/servicesindex.json";
+    private static final String SERVICE_LIST_URL = "https://agesinitiatives.com/dcs/public/dcs/servicesindex.json";
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 456;
     private static int prev = -1;
@@ -180,9 +181,9 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(context, UserActivity.class);
                 startActivity(intent);
             } else {
-                List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()
+                @SuppressLint("WrongConstant") List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.EmailBuilder().build(),
+                        new AuthUI.IdpConfig.GoogleBuilder().build()
                 );
                 startActivityForResult(
                         AuthUI.getInstance()

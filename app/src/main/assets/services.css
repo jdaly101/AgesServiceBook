@@ -44,10 +44,6 @@ p.bmc_collapse {
 	cursor: pointer;
 }
 
-.media-group {
-    display: none;
-}
-
 title, p.designation, p.mixed, p.mode, p.melody {
     text-align: center;
     font-size: 95%;
@@ -445,4 +441,8 @@ span.versiondesignation {
 	vertical-align:middle;
 	color: gray;
 	float: right;
+}
+
+.jqm-dropdown {
+    display: none;
 }

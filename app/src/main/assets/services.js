@@ -17,3 +17,9 @@ $("tr:has(.emc_collapse)").click(function() {
 	var show_pos = $(this).prevAll('tr:has(.bmc_collapse):first').position();
 	window.scrollTo(0,show_pos.top-50);
 });
+
+//window.setInterval(function () {
+//        android.onData($(document).scrollTop())
+//    },
+//    1000
+//)

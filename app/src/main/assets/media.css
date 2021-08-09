@@ -1,0 +1,114 @@
+.media-group {
+    display: block;
+    text-align: center;
+    height: 18pt;
+}
+
+.media-group > a {
+    color: #428bca;
+    text-decoration: none;
+}
+
+span.media-icon {
+    font-style: italic;
+    margin: 0 3px;
+}
+
+@font-face {
+  font-family: 'ED Psaltica';
+  src: url('file:///android_asset/fonts/Psaltica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  src: url("file:///android_asset/fonts/fa-solid-900.eot");
+  src: url("file:///android_asset/fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("file:///android_asset/fonts/fa-solid-900.woff2") format("woff2"), url("file:///android_asset/fonts/fa-solid-900.woff") format("woff"), url("file:///android_asset/fonts/fa-solid-900.ttf") format("truetype"), url("file:///android_asset/fonts/fa-solid-900.svg#fontawesome") format("svg"); }
+
+.far {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400; }
+
+.fa-arrows {}
+.fa-bars {
+    padding-top: 1px;
+}
+.fa-byznote::before{
+  font-family: 'ED Psaltica';
+  font-size: 40pt;
+  content: "\006c";
+  line-height: 0;
+  position: relative;
+  bottom: -18px;
+}
+.fa-calendar {}
+.fa-caret-square-o-left {}
+.fa-caret-square-o-right {}
+.fa-columns {}
+.fa-columns {}
+.fa-envelope {}
+.fa-info-circle {
+	padding-left: 2px;
+}
+.fa-list-alt {}
+.fa-minus {}
+.fa-mobile {}
+.fa-money {}
+.fa-music {}
+.fa-plus {}
+.fa-question-circle {}
+.fa-text-height {}
+.fa-undo {}
+.fa-volume-up {
+	padding-left: 3px;
+}
+
+/* Sets properties for the Byzantine Music Score Icon */
+.byzscore {
+	height: 10pt;
+	width: 15pt;
+}
+
+.glyphicon {
+    font-family: "Font Awesome 5 Free";
+    font-size: 18pt;
+    margin: 0 5px;
+}
+
+.glyphicon-music::before {
+    content: "\f001";
+}
+
+/*
+.jqm-dropdown-menu {
+    min-width: 160px;
+    list-style: none;
+    background:
+    #f7f7f7;
+    border: solid 1px #DDD;
+    border: solid 1px
+    rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px
+    rgba(0, 0, 0, .2);
+    overflow: visible;
+    padding: 4px 0;
+    margin: 0;
+    position: absolute;
+    z-index: 1000000;
+}
+
+.jqm-dropdown-menu li {
+    list-style: none;
+    padding: 0 0;
+    margin: 0;
+    line-height: 18px;
+    display: block;
+}
+
+.jqm-dropdown {
+    display: block;
+}*/

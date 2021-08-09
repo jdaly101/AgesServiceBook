@@ -1,6 +1,4 @@
-package com.agesinitiatives.servicebook.parsers;
-
-import android.util.Log;
+ package com.agesinitiatives.servicebook.parsers;
 
 import com.agesinitiatives.servicebook.entities.AgesDate;
 import com.agesinitiatives.servicebook.entities.AgesService;
@@ -27,7 +25,7 @@ public class ServicesIndexParser {
 
     public List<AgesDate> parse() {
         Calendar calendar = Calendar.getInstance();
-        List<AgesDate> datesListing = new ArrayList();
+        List<AgesDate> datesListing = new ArrayList<>();
 
         try {
             JSONArray yearsArray = this._jsonObj.getJSONArray("years");
@@ -55,20 +53,20 @@ public class ServicesIndexParser {
 
                         Date d = calendar.getTime();
 
-                        List<AgesService> agesServices = new ArrayList();
+                        List<AgesService> agesServices = new ArrayList<>();
 
                         for (int m=0; m < servicesArray.length(); m++) {
                             JSONObject serviceObj = servicesArray.getJSONObject(m);
                             String serviceType = serviceObj.keys().next();
                             String serviceUrl = getServiceTextUrl(serviceObj.getJSONArray(serviceType));
-                            if ((serviceType.equals("Divine Liturgy - Variable Parts") == false) &&
-                                    (serviceType.equals("Matins - Customizable") == false) &&
-                                    (serviceType.equals("Presanctified Liturgy - Variable Parts") == false)) {
+                            if ((!serviceType.equals("Divine Liturgy - Variable Parts")) &&
+                                    (!serviceType.equals("Matins - Customizable")) &&
+                                    (!serviceType.equals("Presanctified Liturgy - Variable Parts"))) {
                                 agesServices.add(new AgesService(d, serviceType, serviceUrl));
                             }
                         }
 
-                        datesListing.add(new AgesDate(d, agesServices));
+                        datesListing.add(new AgesDate(d, agesServices)); 
                     }
                 }
             }
@@ -82,7 +80,7 @@ public class ServicesIndexParser {
     }
 
     public List<String> getDatesList() {
-        List<String> retList = new ArrayList();
+        ArrayList<String> retList = new ArrayList<>();
         for (int i=0; i < _parsedDatesList.size(); i++) {
             retList.add(_parsedDatesList.get(i).toString());
         }

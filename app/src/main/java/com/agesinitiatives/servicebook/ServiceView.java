@@ -1,5 +1,6 @@
 package com.agesinitiatives.servicebook;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,9 +12,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,7 +27,7 @@ import java.io.IOException;
 public class ServiceView extends AppCompatActivity {
 
     private static final String TAG = "ServiceView";
-    private static final String BASE_AGES_URL = "http://www.agesinitiatives.com/dcs/public/dcs/";
+    private static final String BASE_AGES_URL = "https://agesinitiatives.com/dcs/public/dcs/";
     private WebView webView;
     private String serviceUrl;
     private String serviceTitle;
@@ -36,6 +40,7 @@ public class ServiceView extends AppCompatActivity {
     private String fontSize;
     private boolean nightMode;
     private boolean tapLangSwap;
+    private boolean showMusicLinks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +49,11 @@ public class ServiceView extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarServices);
         progressBar.setVisibility(View.VISIBLE);
 
+        WebView.setWebContentsDebuggingEnabled(true);
         webView = findViewById(R.id.serviceWebView);
         webView.getSettings().setJavaScriptEnabled(true);
+//        webView.getSettings().setDomStorageEnabled(true);
+//        webView.setWebChromeClient(new WebChromeClient());
 
         refreshPreferences();
 
@@ -55,16 +63,17 @@ public class ServiceView extends AppCompatActivity {
         serviceTitle = extras.getString("SERVICE_TITLE");
         setTitle(serviceTitle);
 
-//        docLoader = new DocLoader();
-//        docLoader.execute();
+        docLoader = new DocLoader();
+        docLoader.execute();
+
     }
 
     @Override
     public void onResume() {
         refreshPreferences();
 
-        docLoader = new DocLoader();
-        docLoader.execute();
+//        docLoader = new DocLoader();
+//        docLoader.execute();
 
         super.onResume();
     }
@@ -75,6 +84,8 @@ public class ServiceView extends AppCompatActivity {
         fontSize = sharedPreferences.getString("service_font_size", "");
         nightMode = sharedPreferences.getBoolean("night_mode", false);
         tapLangSwap = sharedPreferences.getBoolean("tap_swap_langs", false);
+        showMusicLinks = sharedPreferences.getBoolean("show_music_links", false);
+        Log.i(TAG, "Show music links: " + showMusicLinks);
     }
 
     @Override
@@ -106,81 +117,88 @@ public class ServiceView extends AppCompatActivity {
     private class DocLoader extends AsyncTask<Void, Void, Void> {
         Document doc;
 
+        private void appendStylesheet(Element content, String cssFileName) {
+            content.appendElement("link")
+                    .attr("rel", "stylesheet")
+                    .attr("type", "text/css")
+                    .attr("href", cssFileName);
+        }
+
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                doc = Jsoup.connect(BASE_AGES_URL + serviceUrl).get();
-                doc.head().getElementsByTag("link").remove();
-                doc.head().getElementsByTag("script").remove();
-                doc.body().getElementsByTag("image").remove();
-                doc.body().getElementsByTag("a").remove();
-                doc.body().getElementsByTag("i").remove();
+                Connection.Response response = Jsoup.connect(BASE_AGES_URL + serviceUrl).timeout(10000).execute();
+                if (response.statusCode() == 200) {
+                    doc = response.parse();
+                    doc.head().getElementsByTag("link").remove();
+                    doc.head().getElementsByTag("script").remove();
+                    doc.body().getElementsByTag("image").remove();
+                }
+
             } catch (IOException e) {
 //                Log.e(TAG, e.toString());
             }
             return null;
         }
 
+        @SuppressLint("JavascriptInterface")
         @Override
         protected void onPostExecute(Void result) {
             progressBar.setVisibility(View.GONE);
             Element content = doc.select(".content").first();
-            content.appendElement("link")
-                    .attr("rel", "stylesheet")
-                    .attr("type", "text/css")
-                    .attr("href", "services.css");
+            appendStylesheet(content, "file:///android_asset/services.css");
             if (nightMode) {
-                content.appendElement("link")
-                        .attr("rel", "stylesheet")
-                        .attr("type", "text/css")
-                        .attr("href", "services-night.css");
+                appendStylesheet(content, "file:///android_asset/services-night.css");
             } else {
-                content.appendElement("link")
-                        .attr("rel", "stylesheet")
-                        .attr("type", "text/css")
-                        .attr("href", "services-day.css");
+                appendStylesheet(content, "file:///android_asset/services-day.css");
             }
             if (displayLang.equals("EN")) {
-                content.appendElement("link")
-                        .attr("rel", "stylesheet")
-                        .attr("type", "text/css")
-                        .attr("href", "services-en.css");
+                appendStylesheet(content, "file:///android_asset/services-en.css");
             } else if (displayLang.equals("GR")) {
-                content.appendElement("link")
-                        .attr("rel", "stylesheet")
-                        .attr("type", "text/css")
-                        .attr("href", "services-gr.css");
+                appendStylesheet(content, "file:///android_asset/services-gr.css");
             }
 
             if (fontSize.equals("Small")) {
-                content.appendElement("link")
-                        .attr("rel", "stylesheet")
-                        .attr("type", "text/css")
-                        .attr("href", "font-small.css");
+                appendStylesheet(content, "file:///android_asset/font-small.css");
             } else if (fontSize.equals("Medium")) {
-                content.appendElement("link")
-                        .attr("rel", "stylesheet")
-                        .attr("type", "text/css")
-                        .attr("href", "font-medium.css");
+                appendStylesheet(content, "file:///android_asset/font-medium.css");
             } else if (fontSize.equals("Large")) {
-                content.appendElement("link")
-                        .attr("rel", "stylesheet")
-                        .attr("type", "text/css")
-                        .attr("href", "font-large.css");
+                appendStylesheet(content, "file:///android_asset/font-large.css");
             }
 
+//            content.appendElement("script")
+//                    .attr("src", "file:///android_asset/alwb.js");
             content.appendElement("script")
-                    .attr("src", "jquery-3.2.1.min.js");
+                    .attr("src", "file:///android_asset/jquery-2.0.3.js");
             content.appendElement("script")
-                    .attr("src", "services.js");
+                    .attr("src", "file:///android_asset/services.js");
 
             if (tapLangSwap) {
                 content.appendElement("script")
-                        .attr("src", "langSwap.js");
+                        .attr("src", "file:///android_asset/langSwap.js");
+            }
+
+            if (showMusicLinks) {
+                appendStylesheet(content, "file:///android_asset/fontawesome.min.css");
+                appendStylesheet(content, "file:///android_asset/jquery.dropdown.css" );
+                appendStylesheet(content, "file:///android_asset/media.css");
+
+                content.appendElement("script")
+                        .attr("src", "file:///android_asset/jquery.dropdown.js");
+
+            } else {
+                appendStylesheet(content, "file:///android_asset/media-hidden.css");
             }
 
             String html = content.outerHtml();
-            webView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "UTF-8", null);
+            // webView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "UTF-8", null);
+            webView.addJavascriptInterface(this, "android");
+            webView.loadDataWithBaseURL("https://agesinitiatives.com/dcs/public/dcs/", html, "text/html", "UTF-8", null);
+        }
+
+        @JavascriptInterface
+        public void onData(String posValue) {
+            Log.i(TAG, "JS value: " + posValue + " - " + serviceUrl + " - " + serviceTitle);
         }
     }
 }
