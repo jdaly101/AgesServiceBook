@@ -1,5 +1,7 @@
  package com.agesinitiatives.servicebook.parsers;
 
+import android.util.Log;
+
 import com.agesinitiatives.servicebook.entities.AgesDate;
 import com.agesinitiatives.servicebook.entities.AgesService;
 
@@ -15,7 +17,6 @@ import java.util.List;
 
 
 public class ServicesIndexParser {
-    private static final String TAG = "ServicesIndexParser";
     private JSONObject _jsonObj;
     private List<AgesDate> _parsedDatesList;
 
@@ -122,7 +123,7 @@ public class ServicesIndexParser {
                 String translationLangs = serviceObj.keys().next();
                 String serviceHref = serviceObj.getJSONArray(translationLangs).getJSONObject(0).getString("href");
                 String serviceType = serviceObj.getJSONArray(translationLangs).getJSONObject(0).getString("type");
-                if (serviceType.equalsIgnoreCase("Text/Music"))
+                if (!serviceHref.startsWith("p"))
                     if (translationLangs.equalsIgnoreCase("GR-EN"))
                         retString = serviceHref;
             } catch (JSONException e) {

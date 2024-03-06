@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
@@ -36,7 +35,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String SERVICE_LIST_URL = "https://agesinitiatives.com/dcs/public/dcs/servicesindex.json";
+    private static final String SERVICE_LIST_URL = "https://dcs.goarch.org/goa/dcs/servicesindex.json";
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 456;
     private static int prev = -1;
@@ -176,23 +175,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_about) {
             Intent intent = new Intent(context, AboutActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_user) {
-            if (mAuth.getCurrentUser() != null) {
-                Intent intent = new Intent(context, UserActivity.class);
-                startActivity(intent);
-            } else {
-                @SuppressLint("WrongConstant") List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.EmailBuilder().build(),
-                        new AuthUI.IdpConfig.GoogleBuilder().build()
-                );
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .build(),
-                        RC_SIGN_IN
-                );
-            }
+        } else if (id == R.id.nav_contact) {
+            Intent intent = new Intent(context, ContactActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_privacy) {
             Intent intent = new Intent(context, PrivacyActivity.class);
             startActivity(intent);

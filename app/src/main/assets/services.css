@@ -443,6 +443,33 @@ span.versiondesignation {
 	float: right;
 }
 
-.jqm-dropdown {
+/* .jqm-dropdown {
     display: none;
+} */
+
+span.media-icon {
+    font-family: "Arimo", sans-serif;
+    font-style:italic;
+ 	margin: 0 3px;
 }
+
+/*
+div.media-group {
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    height:18pt;
+}
+div.media-group-empty {
+    text-align:center;
+    height:18pt;
+}
+.m-g-e {
+}
+.m-g-e::after {
+	content:"(No media for this version.)";
+	text-align:center;
+	color:SlateGray;
+	font-size:80%;
+}
+*/

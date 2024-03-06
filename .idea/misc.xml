@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/drawable/ic_menu_camera.xml" value="0.221875" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/drawable/ic_menu_send.xml" value="0.221875" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/drawable/ic_settings_black_24dp.xml" value="0.221875" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/drawable/ic_sync_black_24dp.xml" value="0.3828125" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/drawable/in_app_logo.xml" value="0.3828125" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/drawable/side_nav_bar.xml" value="0.3828125" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/activity_about.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/activity_contact.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/activity_main.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/activity_service_view.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/activity_user.xml" value="0.2884963768115942" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/app_bar_main.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/content_main.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/content_user.xml" value="0.2884963768115942" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/custom_spinner_item.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/expandable_service_list.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/list_group.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/list_item.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/layout/nav_header_main.xml" value="0.2884963768115942" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/John/IdeaProjects/AgesServiceBook/app/src/main/res/xml/prefs_all.xml" value="0.20572916666666666" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
@@ -26,7 +54,7 @@
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="14">
+        <list size="15">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
@@ -41,6 +69,7 @@
           <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
           <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
           <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
+          <item index="14" class="java.lang.String" itemvalue="lombok.NonNull" />
         </list>
       </value>
     </option>

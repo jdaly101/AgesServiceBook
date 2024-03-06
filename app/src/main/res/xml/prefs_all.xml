@@ -24,9 +24,5 @@
         android:defaultValue="false"
         android:key="night_mode"
         android:title="Night Mode" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="show_music_links"
-        android:title="Show Music Links" />
 
 </PreferenceScreen>
